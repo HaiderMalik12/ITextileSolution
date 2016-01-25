@@ -69,6 +69,56 @@ app.get('/itemCategories/:id',function(req,res){
 });
 
 
+//DELETE/itemCategories/:id
+
+app.delete('/itemCategories/:id',function(req,res){
+ 
+ var itemCategoryId=parseInt(req.params.id);
+ db.itemCategory.destroy({
+ 	where:{
+ 		id:itemCategoryId
+ 	}
+ }).then(function(rowsDeleted){
+   if(rowsDeleted === 0){
+   	res.status(404).json({
+   		error:'no ItemCategory found with Id'
+   	});
+   }else{
+   	//everything ok no return
+   	res.status(204).json();
+   }
+ },function(err){
+ res.status(500).send();
+ });
+
+});
+
+//PUT/itemCategories/:id
+app.put('/itemCategories/:id',function(req,res){
+ var validateAttributes={};
+ var itemCategoryId=parseInt(req.params.id,10);
+ var body=_.pick(req.body,'name');
+ if(body.hasOwnProperty('name')){
+ 	validateAttributes.name=body.name;
+ }
+
+ db.itemCategory.findById(itemCategoryId).then(function(itemCategory){
+    if(itemCategory){
+    	itemCategory.update(validateAttributes).then(function(itemCategory){
+          res.json(itemCategory);
+    	},function(err){
+           res.status(404).json(err);
+    	});
+    }else{
+    	res.status(400).send();
+    }
+
+ },function(err){
+  res.status(500).send();
+ });
+
+});
+
 //connect with Databse
 db.sequelize.sync().then(function(){
 
