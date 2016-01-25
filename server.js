@@ -46,6 +46,28 @@ app.get('/itemCategories',function(req,res){
  
 });
 
+//GET/itemCategories/:id
+
+app.get('/itemCategories/:id',function(req,res){
+ var itemCategoryId=parseInt(req.params.id);
+
+ if(_.isNumber(itemCategoryId)){
+ 	 db.itemCategory.findById(itemCategoryId).then(function(itemCategory){
+   if(!!itemCategory)
+   {
+  res.json(itemCategory);
+  }
+  else{
+  	res.status(404).json({
+  		error:'No ItemCategory found'
+  	})
+  }
+  },function(err){
+  res.satus(500).send();
+  });  
+ }
+});
+
 
 //connect with Databse
 db.sequelize.sync().then(function(){
