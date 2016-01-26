@@ -1,0 +1,30 @@
+{
+  "name": "itemcategoryseq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db.js",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "pg": "^4.4.1",
+    "express": "^4.13.4",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.18.0",
+    "sqlite3": "^3.1.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaiderMalik12/ITextileSolution.git"
+  },
+  "author": "Haider Malik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HaiderMalik12/ITextileSolution/issues"
+  },
+  "homepage": "https://github.com/HaiderMalik12/ITextileSolution#readme"
+}
